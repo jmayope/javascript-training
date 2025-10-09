@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="testApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Document</title>
+</head>
+<body ng-controller="indexCtrl">
+  <div class="row">
+    <div class="col-2">
+      MENU PRINCIPAL 
+      <ul class="list-group">
+        <li class="list-group-item" ng-class="{'bg-primary text-white': itemSelected && itemSelected.id === m.id}" ng-click="selectItem(m)" ng-repeat="m in menu">
+          <i class="{{m.icon}} me-1"></i>{{m.name}}
+        </li>
+      </ul>
+    </div>
+    <div class="col-10">
+      CONTENIDO CAMBIANTE <br>
+      {{itemSelected}}
+      <div class="row" ng-if="itemSelected">
+        <div class="col-12" ng-if="itemSelected.id === 'company'">
+          COntenido para Empresas
+        </div>
+        <div class="col-12" ng-if="itemSelected.id === 'user'">
+          COntenido para Usuarios
+        </div>
+        <div class="col-12" ng-if="itemSelected.id === 'company_type'">
+          COntenido para Tipos de Empresa
+        </div>
+        <div class="col-12" ng-if="itemSelected.id === 'residue'">
+          COntenido para Residuos
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
