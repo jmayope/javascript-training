@@ -19,21 +19,113 @@
         </li>
       </ul>
     </div>
-    <div class="col-10">
-      CONTENIDO CAMBIANTE <br>
-      {{itemSelected}}
-      <div class="row" ng-if="itemSelected">
-        <div class="col-12" ng-if="itemSelected.id === 'company'">
-          COntenido para Empresas
-        </div>
-        <div class="col-12" ng-if="itemSelected.id === 'user'">
-          COntenido para Usuarios
-        </div>
-        <div class="col-12" ng-if="itemSelected.id === 'company_type'">
-          COntenido para Tipos de Empresa
-        </div>
-        <div class="col-12" ng-if="itemSelected.id === 'residue'">
-          COntenido para Residuos
+    <div class="col-10 mt-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="row" ng-if="itemSelected">
+            <div class="col-12" ng-if="itemSelected.id === 'residue_type'">
+              <div class="row">
+                <div class="col-8">
+                  <h3>Tipos de Residuo</h3>
+                </div>
+                <div class="col-4 text-end">
+                  <button class="btn btn-sm btn-primary" ng-click="toggleResidueType()">
+                    <i class="fas fa-plus me-1"></i>Nuevo Tipo de Residuo
+                  </button>
+                </div>
+                <div class="col-12 text-center" ng-if="!residueTypes.length && !newResidueType">
+                  <i class="fas fa-times fa-2x text-danger"></i><br>
+                  No tienes registrados Tipos de Residuos.
+                </div>
+                <div class="col-12 mb-2" ng-if="newResidueType">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="row">
+                        <div class="col-8">
+                          Nuevo Tipo de Residuo
+                        </div>
+                        <div class="col-4 text-end">
+                          <button class="btn btn-sm btn-danger" ng-click="toggleResidueType()">
+                            <i class="fas fa-times me-1"></i>Cancelar
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-3">
+                          <small>Abreviatura</small>
+                          <input name="abbr" type="text" ng-model="newResidueType.abbr" class="form-control">
+                        </div>
+                        <div class="col-6">
+                          <small>Nombre</small>
+                          <input name="name" type="text" ng-model="newResidueType.name" class="form-control">
+                        </div>
+                        <div class="col-3">
+                          <small>Unidad de Medida</small>
+                          <select name="unitMeasurement" ng-model="newResidueType.unitMeasurement" id="" class="form-select">
+                            <option ng-value="undefined">--SELECCIONE--</option>
+                            <option ng-repeat="u in unitMeasurements" value="{{u}}">{{u}}</option>
+                          </select>
+                        </div>
+                        <div class="col-12">
+                          <small>Descripción</small>
+                          <textarea name="description" ng-model="newResidueType.description" id="" class="form-control"></textarea>
+                        </div>
+                        <div class="col-12">
+                          <small>Estado</small>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" ng-model="newResidueType.status" id="status">
+                            <label class="form-check-label" for="status">
+                              ¿Activo?
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer text-center">
+                      <button class="btn btn-sm btn-primary" ng-click="addResidueType()">
+                        <i class="fas fa-save me-1"></i>Guardar Cambios
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12" ng-if="residueTypes.length">
+                  <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="rt in residueTypes">
+                      <div class="row">
+                        <div class="col-10">
+                          <span class="badge bg-success me-2">{{rt.abbr | uppercase}}</span>{{rt.name | uppercase}} | {{rt.unitMeasurement}} <br>
+                          <small>{{rt.description | uppercase}}</small>
+                        </div>
+                        <div class="col-2 text-end pt-1">
+                          <button class="btn btn-sm btn-light text-primary me-2" ng-click="toggleResidueType(rt)">
+                            <i class="fas fa-edit"></i>
+                          </button>
+                          <button class="btn btn-sm btn-light text-danger" ng-click="deleteResidueType($index)">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-12" ng-if="itemSelected.id === 'company'">
+              {{itemSelected}}
+              COntenido para Empresas
+            </div>
+            <div class="col-12" ng-if="itemSelected.id === 'user'">
+              COntenido para Usuarios
+            </div>
+            <div class="col-12" ng-if="itemSelected.id === 'company_type'">
+              COntenido para Tipos de Empresa
+            </div>
+            <div class="col-12" ng-if="itemSelected.id === 'residue'">
+              COntenido para Residuos
+            </div>
+          </div>
         </div>
       </div>
     </div>
